@@ -19,16 +19,10 @@ public class Ball : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    // Activate rigidbody and apply force on tap
+    
     void Update()
     {
-        
-        if (Input.GetKeyDown("space") && throwCheck == false)
-        {
-            rb.useGravity = true;
-            rb.AddForce(0, 6, 6, ForceMode.Impulse);
-            throwCheck = true;
-        }
+       
     }
 
     //cup detection
@@ -41,5 +35,13 @@ public class Ball : MonoBehaviour
         Vector3 ballStart = new Vector3(0.02523589f, 0.0204134f, 1.0533f);
         Instantiate(ball, ballStart, ball.transform.rotation);
         Destroy(gameObject);
+    }
+
+    // Activate rigidbody and apply force on tap
+    public void ThrowBall()
+    {
+        rb.useGravity = true;
+        rb.AddForce(0, 6, 6, ForceMode.Impulse);
+        throwCheck = true;
     }
 }
