@@ -9,9 +9,17 @@ public class Ball : MonoBehaviour
     public Rigidbody rb;
     public bool throwCheck = false;
 
-    public GameObject ball;
+    [SerializeField]
+    private GameObject ball;
+
+
+    private Vector3 ballStart = new Vector3(0.02523589f, 0.0204134f, 1.0533f);
+    [SerializeField]
+    private Transform parent;
     void Start()
     {
+        
+        ball.transform.SetParent(parent);
         coll = GetComponent<Collider>();
         coll.isTrigger = true;
         rb.useGravity = false;
@@ -38,8 +46,9 @@ public class Ball : MonoBehaviour
         {
             Destroy(other.gameObject);
         }
-        Vector3 ballStart = new Vector3(0.02523589f, 0.0204134f, 1.0533f);
+        //Vector3 ballStart = new Vector3(0.02523589f, 0.0204134f, 1.0533f);
         Instantiate(ball, ballStart, ball.transform.rotation);
+        
         Destroy(gameObject);
     }
 }
