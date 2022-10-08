@@ -13,42 +13,51 @@ public class Ball : MonoBehaviour
     private GameObject ball;
 
 
-    private Vector3 ballStart = new Vector3(0.02523589f, 0.0204134f, 1.0533f);
+    
     [SerializeField]
     private Transform parent;
+
+    private Vector3 ballStart = new Vector3();
     void Start()
     {
-        
         ball.transform.SetParent(parent);
         coll = GetComponent<Collider>();
         coll.isTrigger = true;
         rb.useGravity = false;
         throwCheck = false;
         rb = GetComponent<Rigidbody>();
+        
     }
 
-    // Activate rigidbody and apply force on tap
+    
     void Update()
     {
-        
-        if (Input.GetKeyDown("space") && throwCheck == false)
-        {
-            rb.useGravity = true;
-            rb.AddForce(0, 6, 6, ForceMode.Impulse);
-            throwCheck = true;
-        }
+       
     }
 
     //cup detection
     private void OnTriggerEnter(Collider other)
-    {  
+    {
         if (other.tag == "Cup")
         {
             Destroy(other.gameObject);
         }
-        //Vector3 ballStart = new Vector3(0.02523589f, 0.0204134f, 1.0533f);
-        Instantiate(ball, ballStart, ball.transform.rotation);
-        ball.transform.SetParent(parent);
+
+        ballStart.x = parent.position.x;
+        ballStart.y = parent.position.y - 0.29f;
+        ballStart.z = parent.position.z + 0.73f;
+        Instantiate(ball, ballStart, parent.rotation);
+        
+        
+
         Destroy(gameObject);
+    }
+
+    // Activate rigidbody and apply force on tap
+    public void ThrowBall()
+    {
+        rb.useGravity = true;
+        rb.AddForce(0, 6, 6, ForceMode.Impulse);
+        throwCheck = true;
     }
 }
