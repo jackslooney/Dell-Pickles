@@ -48,7 +48,7 @@ public class Ball : MonoBehaviour
         }
         //Vector3 ballStart = new Vector3(0.02523589f, 0.0204134f, 1.0533f);
         Instantiate(ball, ballStart, ball.transform.rotation);
-        
+        ball.transform.SetParent(parent);
         Destroy(gameObject);
     }
 }
