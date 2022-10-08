@@ -133,6 +133,7 @@ MonoBehaviour:
   rb: {fileID: 3378283352036743152}
   throwCheck: 0
   ball: {fileID: 3378283352036743158}
+  parent: {fileID: 0}
 --- !u!114 &3378283351557655647
 MonoBehaviour:
   m_ObjectHideFlags: 0
