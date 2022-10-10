@@ -48,13 +48,8 @@ public class Ball : MonoBehaviour
             scoreCheck.cupCount--;
         }
 
-        ballStart.x = parent.position.x;
-        ballStart.y = parent.position.y - 0.29f;
-        ballStart.z = parent.position.z + 0.73f;
+        ballStart = parent.position + (parent.forward*0.75f) - (parent.up * 0.25f);
         Instantiate(ball, ballStart, parent.rotation);
-        
-        
-
         Destroy(gameObject);
 
     }
@@ -63,7 +58,8 @@ public class Ball : MonoBehaviour
     public void ThrowBall()
     {
         rb.useGravity = true;
-        rb.AddForce(0, 6, 6, ForceMode.Impulse);
+        rb.AddRelativeForce(Vector3.forward * 5, ForceMode.Impulse);
+        rb.AddForce(Vector3.up * 5, ForceMode.Impulse);
         throwCheck = true;
     }
 }
