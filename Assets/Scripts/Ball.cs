@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class Ball : MonoBehaviour
 {
     public Collider coll;
@@ -12,7 +12,7 @@ public class Ball : MonoBehaviour
     [SerializeField]
     private GameObject ball;
 
-
+    public Score scoreCheck;
     
     [SerializeField]
     private Transform parent;
@@ -30,9 +30,13 @@ public class Ball : MonoBehaviour
     }
 
     
-    void Update()
+    void LateUpdate()
     {
-       
+        Debug.Log(scoreCheck.cupCount);
+        if (scoreCheck.cupCount <= 0)
+        {
+            SceneManager.LoadScene(2);
+        }
     }
 
     //cup detection
@@ -41,6 +45,7 @@ public class Ball : MonoBehaviour
         if (other.tag == "Cup")
         {
             Destroy(other.gameObject);
+            scoreCheck.cupCount--;
         }
 
         ballStart.x = parent.position.x;
@@ -51,6 +56,7 @@ public class Ball : MonoBehaviour
         
 
         Destroy(gameObject);
+
     }
 
     // Activate rigidbody and apply force on tap
